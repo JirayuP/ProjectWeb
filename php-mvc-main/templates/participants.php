@@ -23,7 +23,7 @@
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
-        </tbody>
+        </tbody>6
     </table>
     <?php include 'footer.php'; ?>
 </body>
