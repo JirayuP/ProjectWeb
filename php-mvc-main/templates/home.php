@@ -1,11 +1,16 @@
-<html>
-
-<head></head>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบกิจกรรม</title>
+</head>
 <body>
-    
-    <?php include 'header.php'; ?>
-    
+        <?php include 'header.php'; ?>
+<nav>
+    <a href="/home">หน้าแรก</a> | 
+    <a href="/my_events">กิจกรรมของฉัน</a>
+</nav>
 
     
     <main>
@@ -25,7 +30,5 @@
 
     
     <?php include 'footer.php'; ?>
-    
 </body>
-
 </html>

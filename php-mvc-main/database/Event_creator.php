@@ -1,6 +1,6 @@
 <?php
-
-function searchEvent($keyword, $startDate, $endDate){
+function searchEvent($keyword, $startDate, $endDate)
+{
     // ดึงข้อมูลจาก database.php
 $conn = getConnection(); 
     // คำสั่ง SQL 
@@ -20,7 +20,9 @@ $events = $result->fetch_all(MYSQLI_ASSOC);
 
 return $events;
 }
-function getParticipants($eventId) {
+
+function getParticipants($eventId)
+{
 $conn = getConnection(); 
     // SQL สำหรับ Join ตาราง เพื่อเอาชื่อคนและชื่อกิจกรรมมาแสดง
     $sql = "SELECT r.*, u.user_name, e.event_name 
@@ -36,3 +38,4 @@ $conn = getConnection();
     
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+?>
