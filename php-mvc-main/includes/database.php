@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 function getConnection(): mysqli
 {
+    global $hostname, $username, $password, $dbName;
     $conn = new mysqli($hostname, $username, $password, $dbName);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

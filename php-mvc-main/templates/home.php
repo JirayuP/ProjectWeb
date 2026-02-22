@@ -3,11 +3,11 @@
 <head></head>
 
 <body>
-    <!-- Header และ Footer อาจแยกออกเป็นไฟล์แยกต่างหากได้ -->
+    
     <?php include 'header.php'; ?>
-    <!-- Header และ Footer อาจแยกออกเป็นไฟล์แยกต่างหากได้ -->
+    
 
-    <!-- ส่วนแสดงผลหลักของหน้า -->
+    
     <main>
         <form action="/search" method="GET">
     <input type="text" name="keyword" placeholder="ชื่อกิจกรรม...">
@@ -21,11 +21,11 @@
     <button type="submit">ค้นหา</button>
 </form>
     </main>
-    <!-- ส่วนแสดงผลหลักของหน้า -->
+    
 
-    <!-- Header และ Footer อาจแยกออกเป็นไฟล์แยกต่างหากได้ -->
+    
     <?php include 'footer.php'; ?>
-    <!-- Header และ Footer อาจแยกออกเป็นไฟล์แยกต่างหากได้ -->
+    
 </body>
 
 </html>
