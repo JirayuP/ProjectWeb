@@ -1,8 +1,8 @@
 <?php
-$conn = getConnection(); 
+
 function searchEvent($keyword, $startDate, $endDate){
     // ดึงข้อมูลจาก database.php
-
+$conn = getConnection(); 
     // คำสั่ง SQL 
 $sql = "SELECT * FROM events WHERE event_name LIKE ? AND event_date BETWEEN ? AND ?";
 
@@ -21,7 +21,7 @@ $events = $result->fetch_all(MYSQLI_ASSOC);
 return $events;
 }
 function getParticipants($eventId) {
- 
+$conn = getConnection(); 
     // SQL สำหรับ Join ตาราง เพื่อเอาชื่อคนและชื่อกิจกรรมมาแสดง
     $sql = "SELECT r.*, u.user_name, e.event_name 
             FROM registrations r
