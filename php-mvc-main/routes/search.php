@@ -7,4 +7,6 @@ $end_date = $_GET['end_date'] ?? '';
 $events = searchEvent($keyword, $start_date, $end_date);
 
 // ส่งข้อมูลไป View
-renderView('search', ['events' => $events]);
+renderView('search', ['events' => $events,
+                      'keyword' => $keyword, ]);
+                     
