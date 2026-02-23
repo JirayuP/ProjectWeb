@@ -9,10 +9,17 @@
         <?php include 'header.php'; ?>
 <nav>
     <a href="/home">หน้าแรก</a> | 
-    <a href="/my_events">กิจกรรมของฉัน</a>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <span>สวัสดี, <?= htmlspecialchars($_SESSION['first_name'] . ' ' . $_SESSION['last_name']) ?></span> |
+        <a href="/my_events">กิจกรรมของฉัน</a> |
+        <a href="/logout">ออกจากระบบ</a>
+    <?php else: ?>
+        <a href="/login">เข้าสู่ระบบ</a> |
+        <a href="/register">สมัครสมาชิก</a>
+    <?php endif; ?>
 </nav>
 
-    
+<?php if (isset($_SESSION['user_id'])): ?>
     <main>
         <form action="/search" method="GET">
     <input type="text" name="keyword" placeholder="ชื่อกิจกรรม...">
@@ -26,6 +33,7 @@
     <button type="submit">ค้นหา</button>
 </form>
     </main>
+<?php endif; ?>
     
 
     
