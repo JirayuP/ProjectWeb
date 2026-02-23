@@ -1,4 +1,5 @@
 <?php
+// function ดึงข้อมูลกิจกรรมที่ผู้ใช้คนนี้ไปลงทะเบียนไว้
 function getMyRegistrations($userId) {
     $conn = getConnection(); //
     
@@ -15,19 +16,31 @@ function getMyRegistrations($userId) {
     
     return $result->fetch_all(MYSQLI_ASSOC);
 }
-function registerUser($firstname, $lastname, $email, $password) {
-    $conn = getConnection(); //
+//function ลงทะเบียน
+function registerUser($firstname, $lastname, $email, $password, $gender, $birthday, $province, ) {
+    $conn = getConnection(); 
+
+    $check_email = "SELECT email FROM user WHERE email = ?";
+    $stmt = $conn->prepare($check_email);
+    $stmt->bind_param("s", $email); 
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    if ($user) {
+        return "email_exists";
+    }
     //สุ่ม user_id
     $randomUserId = substr(str_shuffle("0123456789"), 0, 10);
     // hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
-    $sql = "INSERT INTO user (user_id, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO user (user_id, firstname, lastname, email, password, gender, birthdate	, province) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $randomUserId, $firstname, $lastname, $email, $hashedPassword);
+    $stmt->bind_param("ssssssss", $randomUserId, $firstname, $lastname, $email, $hashedPassword, $gender, $birthday, $province);
     
     return $stmt->execute();
 }
+// function login
 function loginUser($email, $password) {
     $conn = getConnection(); //
     
