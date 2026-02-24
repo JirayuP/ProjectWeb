@@ -53,7 +53,7 @@ function loginUser($email, $password) {
 
     // ตรวจสอบว่าพบผู้ใช้และรหัสผ่านถูกต้องหรือไม่
     if ($user && password_verify($password, $user['password'])) {
-        return $user; // ส่งข้อมูลผู้ใช้กลับไป
+        return $user; 
     }
     return false;
 }
