@@ -17,10 +17,10 @@ function getMyRegistrations($userId) {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 //function ลงทะเบียน
-function registerUser($firstname, $lastname, $email, $password, $gender, $birthday, $province, ) {
+function registerUser($firstname, $lastname, $email, $password, $gender, $birthday, $province, $type = 'M' ) {
     $conn = getConnection(); 
 
-    $check_email = "SELECT email FROM user WHERE email = ?";
+    $check_email = "SELECT email FROM users WHERE email = ?";
     $stmt = $conn->prepare($check_email);
     $stmt->bind_param("s", $email); 
     $stmt->execute();
@@ -29,14 +29,18 @@ function registerUser($firstname, $lastname, $email, $password, $gender, $birthd
     if ($user) {
         return "email_exists";
     }
-    //สุ่ม user_id
-    $randomUserId = substr(str_shuffle("0123456789"), 0, 10);
+     //สุ่ม user_id
+    $randomUserId = substr(str_shuffle("0123456789"), 0, 9);
+    // ต่อ user_id
+    $userId = $type . $randomUserId;
+   
+    
     // hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
-    $sql = "INSERT INTO user (user_id, firstname, lastname, email, password, gender, birthdate	, province) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (user_id, firstname, lastname, email, password, gender, birthdate	, province) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssss", $randomUserId, $firstname, $lastname, $email, $hashedPassword, $gender, $birthday, $province);
+    $stmt->bind_param("ssssssss", $userId, $firstname, $lastname, $email, $hashedPassword, $gender, $birthday, $province);
     
     return $stmt->execute();
 }
@@ -44,7 +48,7 @@ function registerUser($firstname, $lastname, $email, $password, $gender, $birthd
 function loginUser($email, $password) {
     $conn = getConnection(); //
     
-    $sql = "SELECT * FROM user WHERE email = ?";
+    $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();

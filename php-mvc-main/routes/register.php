@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birthday = $_POST['birthday'] ?? '';
     $address = $_POST['address'] ?? '';
      
-    $result = registerUser($first_name, $last_name, $email, $password, $gender, $birthday, $address);
+    $result = registerUser($first_name, $last_name, $email, $password, $gender, $birthday, $address,'M');
 
     if($result === true) {
          // เมื่อสมัครสำเร็จ ให้ส่งไปหน้า login หรือหน้าแรก

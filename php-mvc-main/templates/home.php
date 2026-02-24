@@ -7,10 +7,18 @@
 </head>
 <body>
         <?php include 'header.php'; ?>
+
+        <?php
+// ตรวจสอบตัวแรกของ ID ว่าเป็น 'O' (Organizer) หรือไม่
+$isOrganizer = (isset($_SESSION['user_id']) && $_SESSION['user_id'][0] === 'O');
+?>
 <nav>
     <a href="/home">หน้าแรก</a> | 
     <?php if (isset($_SESSION['user_id'])): ?>
-        <span>สวัสดี, <?= htmlspecialchars($_SESSION['first_name'] . ' ' . $_SESSION['last_name']) ?></span> |
+        <?php if ($isOrganizer): ?>
+            <a href="/create_event" > สร้างกิจกรรม</a> |
+            <a href="/participants">จัดการผู้สมัคร</a> |
+        <?php endif; ?>
         <a href="/my_events">กิจกรรมของฉัน</a> |
         <a href="/logout">ออกจากระบบ</a>
     <?php else: ?>
