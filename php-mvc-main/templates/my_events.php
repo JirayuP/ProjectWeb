@@ -24,7 +24,8 @@
                 <?php foreach ($data['myEvents'] as $event): ?>
                     <tr>
                         <td><?= htmlspecialchars($event['event_name']) ?></td>
-                        <td><?= htmlspecialchars($event['event_date']) ?></td>
+                        <td><?= htmlspecialchars($event['start_date']) ?></td>
+                        <td><?= htmlspecialchars($event['end_date']) ?></td>
                         <td>
                             <?php 
                                 // แสดงข้อความตามสถานะ

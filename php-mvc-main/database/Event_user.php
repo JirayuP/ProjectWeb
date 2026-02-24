@@ -4,13 +4,13 @@ function getMyRegistrations($userId) {
     $conn = getConnection(); //
     
     // SQL สำหรับดึงข้อมูลกิจกรรมที่ผู้ใช้คนนี้ไปลงทะเบียนไว้
-    $sql = "SELECT r.status, e.event_name, e.event_date 
-            FROM registrations r
-            JOIN events e ON r.event_id = e.id
+    $sql = "SELECT r.status, e.event_name, e.start_date , e.end_date
+            FROM Registrations r
+            JOIN Events e ON r.event_id = e.event_id
             WHERE r.user_id = ?";
             
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
+    $stmt->bind_param("s", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -60,5 +60,51 @@ function loginUser($email, $password) {
         return $user; 
     }
     return false;
+}
+// function change password
+function changeUserPassword($userId, $oldPassword, $newPassword) {
+    $conn = getConnection();
+
+    // 1. ดึงรหัสผ่านปัจจุบันมาเช็ค
+    $sql = "SELECT password FROM users WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    // 2. ตรวจสอบรหัสผ่านเดิม
+    if ($user && password_verify($oldPassword, $user['password'])) {
+        // 3. Hash รหัสผ่านใหม่และอัปเดต
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $updateSql = "UPDATE users SET password = ? WHERE user_id = ?";
+        $updateStmt = $conn->prepare($updateSql);
+        $updateStmt->bind_param("ss", $hashedPassword, $userId);
+        
+        return $updateStmt->execute();
+    }
+    
+    return false;
+}
+
+//คำขอ ฝั่งผู้ใช้
+function registerForEvent($userId, $eventId) {
+    $conn = getConnection(); //
+
+    // 1. ตรวจสอบก่อนว่าเคยสมัครกิจกรรมนี้ไปแล้วหรือยัง เพื่อป้องกันการสมัครซ้ำ
+    $check = "SELECT registration_id FROM Registrations WHERE user_id = ? AND event_id = ?";
+    $stmt_check = $conn->prepare($check);
+    $stmt_check->bind_param("si", $userId, $eventId);
+    $stmt_check->execute();
+    if ($stmt_check->get_result()->fetch_assoc()) {
+        return "already_registered";
+    }
+
+    // 2. บันทึกคำขอสมัคร (สถานะเริ่มต้นคือ pending)
+    $sql = "INSERT INTO Registrations (user_id, event_id, status) VALUES (?, ?, 'pending')";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $userId, $eventId);
+    
+    return $stmt->execute();
 }
 ?>

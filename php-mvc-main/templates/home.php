@@ -21,6 +21,7 @@ $isOrganizer = (isset($_SESSION['user_id']) && $_SESSION['user_id'][0] === 'O');
         <?php endif; ?>
         <a href="/my_events">กิจกรรมของฉัน</a> |
         <a href="/logout">ออกจากระบบ</a>
+        <a href="/change_password">เปลี่ยนรหัสผ่าน</a>
     <?php else: ?>
         <a href="/login">เข้าสู่ระบบ</a> |
         <a href="/register">สมัครสมาชิก</a>

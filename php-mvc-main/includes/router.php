@@ -14,6 +14,8 @@ const INDEX_ROUNTE = 'home';
 // ฟังชันสำหรับทำให้ URI ที่ร้องขอเข้ามาอยู่ในรูปแบบมาตรฐาน
 function normalizeUri(string $uri): string
 {
+    //ใช้ parse_url เพื่อดึงเฉพาะส่วนที่เป็นเส้นทาง (Path) ออกมา
+    $uri = parse_url($uri, PHP_URL_PATH);
     // ลบเครื่องหมาย '/' ที่อยู่ข้างหน้าและข้างหลังออก และแปลงเป็นตัวพิมพ์เล็ก
     $uri = strtolower(trim($uri, '/'));
 
