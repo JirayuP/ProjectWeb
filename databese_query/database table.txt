@@ -1,0 +1,46 @@
+-- 1. ตาราง Users (ผู้ใช้งาน)
+CREATE TABLE Users (
+    user_id VARCHAR(10) PRIMARY KEY, -- เปลี่ยนเป็น VARCHAR เพื่อเก็บ M หรือ O
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    gender VARCHAR(20),
+    birthdate DATE,
+    province VARCHAR(100)
+);
+
+-- 2. ตาราง Events (กิจกรรม)
+CREATE TABLE Events (
+    event_id INT PRIMARY KEY AUTO_INCREMENT, -- ยังคงเป็น INT AUTO_INCREMENT ได้ปกติ
+    event_name VARCHAR(255) NOT NULL,
+    organizer_id VARCHAR(10), -- เปลี่ยนให้ตรงกับ Users(user_id)
+    description TEXT,
+    start_date DATETIME,
+    end_date DATETIME,
+    location VARCHAR(255),
+    max_participants INT,
+    FOREIGN KEY (organizer_id) REFERENCES Users(user_id)
+);
+
+-- 3. ตาราง Registrations (การลงทะเบียน)
+CREATE TABLE Registrations (
+    registration_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id VARCHAR(10), -- เปลี่ยนให้ตรงกับ Users(user_id)
+    event_id INT,
+    status VARCHAR(50),
+    otp_code VARCHAR(10),
+    otp_expire_time DATETIME,
+    check_in_status VARCHAR(50),
+    registered_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
+
+-- 4. ตาราง Event_Images (รูปภาพกิจกรรม)
+CREATE TABLE Event_Images (
+    image_id INT PRIMARY KEY AUTO_INCREMENT,
+    event_id INT,
+    image_path VARCHAR(255),
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
