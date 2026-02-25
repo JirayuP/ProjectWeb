@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $maxParticipants = $_POST['max_participants'] ?? 0;
     $organizerId = $_SESSION['user_id'];
 
-    // จัดการอัปโหลดรูปภาพ
+    // อัปโหลดรูปภาพ
     $imagePaths = [];
     if (!empty($_FILES['images']['name'][0])) {
         $uploadDir = __DIR__ . '/../public/uploads/';

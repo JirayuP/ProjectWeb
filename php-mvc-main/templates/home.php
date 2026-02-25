@@ -11,16 +11,18 @@
         <?php
 // ตรวจสอบตัวแรกของ ID ว่าเป็น 'O' (Organizer) หรือไม่
 $isOrganizer = (isset($_SESSION['user_id']) && $_SESSION['user_id'][0] === 'O');
+$isMember = (isset($_SESSION['user_id']) && $_SESSION['user_id'][0] === 'M');
 ?>
 <nav>
     <a href="/home">หน้าแรก</a> | 
     <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if ($isMember): ?>
+            <a href="/my_events">กิจกรรมของฉัน</a>
+        <?php endif; ?> 
         <?php if ($isOrganizer): ?>
             <a href="/create_event" > สร้างกิจกรรม</a> |
             <a href="/participants">จัดการผู้สมัคร</a> |
         <?php endif; ?>
-        <a href="/my_events">กิจกรรมของฉัน</a>
-        <a href="/my_events">กิจกรรม</a> |
         <a href="/logout">ออกจากระบบ</a>
         <a href="/change_password">เปลี่ยนรหัสผ่าน</a>
     <?php else: ?>
@@ -82,5 +84,13 @@ $isOrganizer = (isset($_SESSION['user_id']) && $_SESSION['user_id'][0] === 'O');
 
     
     <?php include 'footer.php'; ?>
+
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === 'already') {
+        alert('คุณได้ลงทะเบียนกิจกรรมนี้ไปแล้ว');
+        window.history.replaceState({}, document.title, "/home");
+    }
+</script>
 </body>
 </html>

@@ -17,6 +17,7 @@ if ($eventId) {
         exit;
     } elseif ($result === "already_registered") {
         header('Location: /home?error=already');
+        exit;
     } else {
         echo "เกิดข้อผิดพลาดในการส่งคำขอ";
     }

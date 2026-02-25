@@ -6,7 +6,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'][0] !== 'O') {
 $organizerId = $_SESSION['user_id'];
 $eventId = $_GET['id'] ?? ($_POST['event_id'] ?? 0);
 
-// กรณีส่งฟอร์มแก้ไขเข้ามา (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $_POST['event_name'] ?? '';
     $description = $_POST['description'] ?? '';

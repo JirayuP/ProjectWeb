@@ -1,7 +1,12 @@
 <?php
 
 declare(strict_types=1);
+
+
 session_start();
+
+// กำหนดโซนเวลาเป็นกรุงเทพมหานคร
+date_default_timezone_set('Asia/Bangkok');
 
 // กำหนดค่าคงที่สำหรับไดเรกทอรีต่างๆ ในโปรเจค
 const INCLUDES_DIR = __DIR__ . '/../includes';
@@ -14,7 +19,7 @@ require_once INCLUDES_DIR . '/router.php';
 require_once INCLUDES_DIR . '/view.php';
 require_once INCLUDES_DIR . '/database.php';
 
-// เรียก database ฟังก์ชันเพื่อเชื่อมต่อฐานข้อมูล (ถ้าจำเป็น)
+
 
 
 

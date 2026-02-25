@@ -6,6 +6,7 @@
     <title>สร้างกิจกรรม</title>
 </head>
 <body>
+    <a href="/home">หน้าแรก</a> |
     <form action="/create_event" method="POST" enctype="multipart/form-data">
     <input type="text" name="event_name" placeholder="ชื่อกิจกรรม" required>
     <textarea name="description" placeholder="รายละเอียด"></textarea>

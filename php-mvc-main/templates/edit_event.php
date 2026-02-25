@@ -3,6 +3,7 @@
 <body>
     <?php include 'header.php'; ?>
     <h2>แก้ไขกิจกรรม</h2>
+    <a href="/home">หน้าแรก</a> |
     <form action="/edit_event" method="POST">
         <input type="hidden" name="event_id" value="<?= htmlspecialchars($data['event']['event_id']) ?>">
         

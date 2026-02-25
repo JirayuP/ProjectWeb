@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php include 'header.php'; ?>
-
+     <a href="/home">หน้าแรก</a> |
     <?php if (isset($data['mode']) && $data['mode'] === 'select_event'): ?>
         <h2>เลือกกิจกรรมที่ต้องการจัดการ</h2>
         <?php if (empty($data['events'])): ?>
@@ -26,10 +26,11 @@
                         <tr>
                             <td><?= htmlspecialchars($event['event_name']) ?></td>
                             <td><?= htmlspecialchars($event['start_date']) ?></td>
-                            <td>
+                           <td>
     <a href="/participants?event_id=<?= $event['event_id'] ?>">ดูผู้สมัคร</a> | 
+    <a href="/checkin?event_id=<?= $event['event_id'] ?>" style="color: green;">เช็คชื่อเข้างาน</a> | 
     <a href="/edit_event?id=<?= $event['event_id'] ?>" style="color: orange;">แก้ไข</a> | 
-    <a href="/delete_event?id=<?= $event['event_id'] ?>" onclick="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบกิจกรรมนี้? ข้อมูลการสมัครจะถูกลบทิ้งทั้งหมด')" style="color: red;">ลบ</a>
+    <a href="/delete_event?id=<?= $event['event_id'] ?>" onclick="return confirm('แน่ใจหรือไม่?')" style="color: red;">ลบ</a>
 </td>
                         </tr>
                     <?php endforeach; ?>
@@ -47,7 +48,7 @@
                     <th>User ID</th>
                     <th>ชื่อ-นามสกุล</th>
                     <th>อีเมล</th>
-                    <th>จังหวัด</th>
+                    <th>ที่อยู่</th>
                     <th>วันที่ลงทะเบียน</th>
                     <th>สถานะ</th>
                     <th>จัดการ</th>

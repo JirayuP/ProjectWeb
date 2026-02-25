@@ -9,7 +9,7 @@
 <?php include 'header.php'; ?>
 
 <h1>ผลการค้นหาสำหรับ: <?= htmlspecialchars($data['keyword'] ?? '') ?></h1>
-
+<a href="/home">หน้าแรก</a> |
 <?php if (empty($data['events'])): ?>
     <div style="color: gray; text-align: center; margin-top: 20px;">
         <p>ไม่พบกิจกรรมที่ตรงตามเงื่อนไขที่คุณค้นหา</p>
