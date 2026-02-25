@@ -160,4 +160,16 @@ function verifyCheckInOTP($eventId, $otpCode, $organizerId) {
     }
     return false; // OTP ผิด หรือ หมดอายุ
 }
+//ดึงข้อมูลผู้ใช้
+function getUserById($userId) {
+    $conn = getConnection();
+    $sql = "SELECT * FROM users WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    return $user;
+}
+
 ?>
