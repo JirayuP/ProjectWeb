@@ -145,4 +145,13 @@ function getEventImages($eventId) {
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+//ดึงกิจกรรมทั้งหมด
+function getAllEvents() {
+    $conn = getConnection();
+    // ดึงกิจกรรมทั้งหมด เรียงตามวันที่เริ่มกิจกรรมจากใกล้ไปไกล
+    $sql = "SELECT * FROM Events ORDER BY start_date ASC"; 
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
 ?>

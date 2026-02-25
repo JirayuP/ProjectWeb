@@ -13,13 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $maxParticipants = $_POST['max_participants'] ?? 0;
     $organizerId = $_SESSION['user_id'];
 
-    // จัดการอัปโหลดรูปภาพ (ตัวอย่างการจัดการไฟล์เบื้องต้น)
+    // จัดการอัปโหลดรูปภาพ
     $imagePaths = [];
     if (!empty($_FILES['images']['name'][0])) {
+        $uploadDir = __DIR__ . '/../public/uploads/';
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-            $fileName = time() . "_" . $_FILES['images']['name'][$key];
-            move_uploaded_file($tmpName, "public/uploads/" . $fileName);
-            $imagePaths[] = "uploads/" . $fileName;
+            if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK) continue;
+            $fileName = time() . "_" . basename($_FILES['images']['name'][$key]);
+            if (move_uploaded_file($tmpName, $uploadDir . $fileName)) {
+                $imagePaths[] = "uploads/" . $fileName;
+            }
         }
     }
 
