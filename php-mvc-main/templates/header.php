@@ -84,12 +84,15 @@ $isLoggedIn  = isset($_SESSION['user_id']);
                             </svg>
                         </button>
                         <div class="dropdown-menu absolute right-0 mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
-                            <a href="/profile" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-                                โปรไฟล์
+                            <a href="/profile" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                <span>โปรไฟล์</span>
                             </a>
-                            <a href="/change_password" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                            <a href="/change_password" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                <svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
                                 เปลี่ยนรหัสผ่าน
                             </a>
                             <hr class="my-1 border-gray-100">
@@ -131,6 +134,7 @@ $isLoggedIn  = isset($_SESSION['user_id']);
                 <?php endif; ?>
                 <a href="/change_password" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg">เปลี่ยนรหัสผ่าน</a>
                 <a href="/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg">ออกจากระบบ</a>
+                
             <?php else: ?>
                 <a href="/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg">เข้าสู่ระบบ</a>
                 <a href="/register" class="block px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg">สมัครสมาชิก</a>
@@ -138,7 +142,38 @@ $isLoggedIn  = isset($_SESSION['user_id']);
         </div>
     </div>
 </nav>
-
+<?php if ($isLoggedIn): ?>
+<!-- Search Bar -->
+<div class="bg-gray-50 border-b border-gray-100 px-4 py-3">
+    <div class="max-w-7xl mx-auto">
+        <form action="/search" method="GET">
+            <div class="flex flex-col sm:flex-row gap-2 items-center">
+                <div class="flex-1 relative w-full">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" name="keyword" placeholder="ค้นหาชื่อกิจกรรม..."
+                        class="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <label class="text-xs text-gray-500 whitespace-nowrap">ตั้งแต่:</label>
+                    <input type="date" name="start_date"
+                        class="py-2 px-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <label class="text-xs text-gray-500 whitespace-nowrap">ถึง:</label>
+                    <input type="date" name="end_date"
+                        class="py-2 px-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                </div>
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm whitespace-nowrap shrink-0">
+                    ค้นหา
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<?php endif; ?>
 <script>
     document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
         const menu = document.getElementById('mobile-menu');

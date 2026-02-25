@@ -13,8 +13,8 @@ function searchEvent($keyword, $startDate, $endDate)
     $searchTerm = "%$keyword%";
 
     // กำหนดค่าเริ่มต้นถ้าว่าง และเพิ่มเวลาเพื่อให้ครอบคลุมทั้งวัน
-    $dateFrom = !empty($startDate) ? $startDate . " 00:00:00" : '1000-01-01 00:00:00';
-    $dateTo = !empty($endDate) ? $endDate . " 23:59:59" : '9999-12-31 23:59:59';
+    $dateFrom = !empty($startDate) ? $startDate : '1000-01-01';
+    $dateTo = !empty($endDate) ? $endDate : '9999-12-31';
 
     
     $stmt->bind_param("sss", $searchTerm, $dateTo, $dateFrom);

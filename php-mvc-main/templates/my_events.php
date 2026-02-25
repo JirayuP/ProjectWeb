@@ -48,7 +48,7 @@
                                 <td class="px-6 py-4">
                                     <span class="font-medium text-gray-900 text-sm"><?= htmlspecialchars($event['event_name']) ?></span>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-500"><?= htmlspecialchars($event['start_date']) ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-500"><?= date('d/m/Y', strtotime($event['start_date'])) ?> - <?= date('d/m/Y', strtotime($event['end_date'])) ?></td>
                                 <td class="px-6 py-4">
                                     <?php if ($event['status'] == 'pending'): ?>
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">

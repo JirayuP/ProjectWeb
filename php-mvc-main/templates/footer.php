@@ -11,10 +11,9 @@
                 </div>
                 <span class="font-semibold text-sm">EventHub</span>
             </div>
-            <p class="text-blue-200 text-sm">&copy; <?= date('Y') ?> All rights reserved by Aj.M.</p>
+            <p class="text-blue-200 text-sm">&copy; <?= date('Y') ?> All rights reserved by ..</p>
             <div class="flex items-center space-x-4 text-sm text-blue-300">
                 <a href="/home" class="hover:text-white transition-colors">หน้าแรก</a>
-                <a href="/login" class="hover:text-white transition-colors">เข้าสู่ระบบ</a>
             </div>
         </div>
     </div>
