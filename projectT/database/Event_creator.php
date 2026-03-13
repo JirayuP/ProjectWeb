@@ -66,7 +66,7 @@ function createEvent($eventName, $description, $startDate, $endDate, $location, 
 
 //อัปเดตสถานะ
 function updateRegistrationStatus($registrationId, $status) {
-    $conn = getConnection(); //
+    $conn = getConnection(); 
     
     // ตรวจสอบว่าสถานะที่ส่งมาเป็นค่าที่อนุญาต 
     $allowedStatuses = ['approved', 'rejected', 'pending'];
@@ -115,7 +115,7 @@ function updateEvent($eventId, $eventName, $description, $startDate, $endDate, $
 function deleteEvent($eventId, $organizerId) {
     $conn = getConnection();
     
-    // 1. ลบรูปภาพที่เกี่ยวข้องใน Event_Images ก่อน
+    // 1. ลบรูปภาพที่เกี่ยวข้องใน Event_Images ก่อ
     $sqlImg = "DELETE FROM Event_Images WHERE event_id = ?";
     $stmtImg = $conn->prepare($sqlImg);
     $stmtImg->bind_param("i", $eventId);
@@ -127,7 +127,7 @@ function deleteEvent($eventId, $organizerId) {
     $stmtReg->bind_param("i", $eventId);
     $stmtReg->execute();
 
-    // 3. ลบตัวกิจกรรมใน Events เป็นลำดับสุดท้าย
+    // 3. ลบตัวกิจกรรมใน Events 
     $sql = "DELETE FROM Events WHERE event_id = ? AND organizer_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("is", $eventId, $organizerId);

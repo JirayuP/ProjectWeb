@@ -143,7 +143,7 @@ $isLoggedIn  = isset($_SESSION['user_id']);
     </div>
 </nav>
 <?php if ($isLoggedIn): ?>
-<!-- Search Bar -->
+<!-- Search  -->
 <div class="bg-gray-50 border-b border-gray-100 px-4 py-3">
     <div class="max-w-7xl mx-auto">
         <form action="/search" method="GET">

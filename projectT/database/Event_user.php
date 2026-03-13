@@ -1,7 +1,7 @@
 <?php
 // function ดึงข้อมูลกิจกรรมที่ผู้ใช้คนนี้ไปลงทะเบียนไว้
 function getMyRegistrations($userId) {
-    $conn = getConnection(); //
+    $conn = getConnection(); 
     
     // SQL สำหรับดึงข้อมูลกิจกรรมที่ผู้ใช้คนนี้ไปลงทะเบียนไว้
     $sql = "SELECT r.event_id, r.status, r.otp_code, r.otp_expire_time, r.check_in_status, e.event_name, e.start_date, e.end_date
@@ -24,7 +24,7 @@ function generateUserOTP($userId, $eventId) {
     // สุ่มเลข 6 หลัก
     $otp = sprintf("%06d", mt_rand(100000, 999999)); 
 
-    // ใช้ PHP คำนวณเวลาหมดอายุ (Bangkok time) แทน MySQL NOW() ที่อาจเป็น UTC
+    // ใช้ PHP คำนวณเวลาหมดอายุ เวลากรุงเทพ
     $expireTime = date('Y-m-d H:i:s', strtotime('+30 minutes'));
 
     $sql = "UPDATE Registrations 

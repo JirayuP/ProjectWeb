@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = registerUser($first_name, $last_name, $email, $password, $gender, $birthday, $address,'M');
 
     if($result === true) {
-         // เมื่อสมัครสำเร็จ ให้ส่งไปหน้า login หรือหน้าแรก
+         // สมัครสำเร็จ ไปหน้าแรก
         header('Location: /index');
         exit;
     }
@@ -42,6 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         renderView('register',['error' => 'การลงทะเบียนล้มเหลว กรุณาลองใหม่']);
     }
 } else {
-    // แสดงหน้าฟอร์มสมัครสมาชิก
-    renderView('register'); //
+    
+    renderView('register'); 
 }

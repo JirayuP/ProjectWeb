@@ -30,7 +30,7 @@
             </a>
         </div>
     <?php else: ?>
-        <!-- Table Card -->
+        
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-100">
@@ -92,7 +92,7 @@
                                                         หมดอายุ: <?= $event['otp_expire_time'] ?>
                                                     </p>
                                                 </div>
-                                            <?php else: ?>
+                                            <?php else: ?>s
                                                 <a href="/request_otp?event_id=<?= $event['event_id'] ?>"
                                                    class="inline-flex items-center gap-1.5 px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition-colors shadow-sm">
                                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

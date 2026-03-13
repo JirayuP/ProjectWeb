@@ -9,6 +9,6 @@ $userId = $_SESSION['user_id'];
 if ($eventId) {
     generateUserOTP($userId, $eventId);
 }
-// กลับไปหน้ากิจกรรมของฉัน
+
 header('Location: /my_events');
 exit;
