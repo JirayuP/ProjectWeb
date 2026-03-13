@@ -5,10 +5,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'][0] !== 'O') {
 }
 
 $organizerId = $_SESSION['user_id'];
-$eventId = $_GET['event_id'] ?? null; // ใช้ null เพื่อเช็คว่ามีค่าส่งมาไหม
+$eventId = $_GET['event_id'] ?? null; 
 
 if ($eventId) {
-    // กรณีที่ 1: เลือกกิจกรรมแล้ว -> ให้แสดงรายชื่อคนสมัคร (Logic เดิม)
+    //  เลือกกิจกรรมแล้ว 
     $participants = getParticipantsByEvent($eventId, $organizerId);
     
     // ส่ง eventId ไปด้วย เพื่อใช้ในปุ่มอนุมัติ/ปฏิเสธ
@@ -18,7 +18,7 @@ if ($eventId) {
         'eventId' => $eventId 
     ]);
 } else {
-    // กรณีที่ 2: ยังไม่เลือกกิจกรรม -> ให้ดึงรายชื่อกิจกรรมมาให้เลือก (Logic ใหม่)
+    //  ยังไม่เลือกกิจกรรม 
     $events = getEventsByOrganizer($organizerId);
     renderView('participants', [
         'mode' => 'select_event',

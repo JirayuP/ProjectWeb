@@ -73,7 +73,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1.5">ที่อยู่ / จังหวัด</label>
-                    <input type="text" name="address" required placeholder="ที่อยู่หรือจังหวัด"
+                    <input type="text" name="province" required placeholder="ที่อยู่หรือจังหวัด"
                         class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-gray-50">
                 </div>
 

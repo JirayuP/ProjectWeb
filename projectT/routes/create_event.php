@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ตรวจสอบว่าเป็นผู้สร้างกิจกรรม (ID ขึ้นต้นด้วย O)
+    // ตรวจสอบว่าเป็นผู้สร้างกิจกรรม 
     if (!isset($_SESSION['user_id']) || $_SESSION['user_id'][0] !== 'O') {
         die("คุณไม่มีสิทธิ์สร้างกิจกรรม");
     }
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // อัปโหลดรูปภาพ
     $imagePaths = [];
     if (!empty($_FILES['images']['name'][0])) {
-        $uploadDir = __DIR__ . '/../uploads/';
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
         foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
             if ($_FILES['images']['error'][$key] !== UPLOAD_ERR_OK) continue;
             $fileName = time() . "_" . basename($_FILES['images']['name'][$key]);
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $imagePaths[] = "uploads/" . $fileName;
             }
         }
-    }       
+    }
 
     if (createEvent($eventName, $description, $startDate, $endDate, $location, $maxParticipants, $organizerId, $imagePaths)) {
         header('Location: /index');
@@ -32,4 +32,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 renderView('create_event');
-?>

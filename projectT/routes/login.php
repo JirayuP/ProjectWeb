@@ -11,11 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['first_name'] = $user['firstname'];
         $_SESSION['last_name'] = $user['lastname'];
         
-        header('Location: /index'); // ล็อกอินสำเร็จไปหน้าแรก
+        header('Location: /index'); 
         exit;
     } else {
         renderView('login', ['error' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง']);
     }
 } else {
-    renderView('login'); // แสดงหน้าฟอร์ม Login
+    renderView('login'); 
 }

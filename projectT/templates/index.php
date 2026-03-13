@@ -20,7 +20,8 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
- 
+  
+
     <!-- Section Header -->
     <div class="flex items-center justify-between mb-6">
         <div>
@@ -50,17 +51,13 @@
             <?php foreach ($data['events'] as $event): ?>
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col">
 
-                    <!-- Event Images -->
+                    
                     <?php if (!empty($event['images'])): ?>
                         <?php 
                             $imgCount = count($event['images']);
                             $gridClass = $imgCount == 1 ? 'grid-cols-1' : ($imgCount == 2 ? 'grid-cols-2' : 'grid-cols-2'); 
                         ?>
                         <div class="h-48 overflow-hidden bg-gray-100 grid <?= $gridClass ?> gap-0.5 relative group cursor-pointer" onclick="openImageModal(this)">
-                            <!-- Store image URLs in a hidden script tag for the modal -->
-                            <script type="application/json">
-                                <?= json_encode(array_map(function($img) { return '/' . $img['image_path']; }, $event['images'])) ?>
-                            </script>
                             
                             <?php foreach(array_slice($event['images'], 0, 3) as $index => $img): ?>
                                 <div class="relative h-full w-full">
@@ -85,7 +82,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <!-- Card Body -->
+                    
                     <div class="p-5 flex flex-col flex-1">
                         <h3 class="font-semibold text-gray-900 text-base leading-snug mb-3">
                             <?= htmlspecialchars($event['event_name']) ?>
@@ -94,9 +91,9 @@
                         <div class="space-y-2 text-sm text-gray-500 flex-1">
                             <div class="flex items-center gap-2">
                                <p><strong>ช่วงเวลา:</strong> 
-                                  <?= date('d/m/Y', strtotime($event['start_date'])) ?> - 
+                                  <?= date('d/m/Y', strtotime($event['start_date'])) ?> 
                                   <?= date('d/m/Y', strtotime($event['end_date'])) ?>
-                               </p>s
+                               </p>
                             </div>
                             <div class="flex items-center gap-2">
                                 <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,145 +125,29 @@
         </div>
     <?php endif; ?>
 
+      <?php if (isset($_GET['error']) && $_GET['error'] === 'already'): ?>
+        <div id="toast-already" class="flex items-center gap-3 mb-6 px-5 py-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl shadow-sm animate-fade-in">
+            <svg class="w-5 h-5 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+            <div class="flex-1">
+                <p class="font-semibold text-sm">คุณลงทะเบียนกิจกรรมนี้ไปแล้ว</p>
+                <p class="text-xs text-amber-600 mt-0.5">ไปดูสถานะการสมัครได้ที่หน้า <a href="/my_events" class="underline font-medium hover:text-amber-800">กิจกรรมของฉัน</a></p>
+            </div>
+            <button onclick="document.getElementById('toast-already').remove()" class="text-amber-400 hover:text-amber-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+    <?php endif; ?>
+
 </div>
 
 <?php endif; ?>
 
 <?php include 'footer.php'; ?>
 
-<!-- Image Modal -->
-<div id="imageModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-    <!-- Close Button -->
-    <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white/70 hover:text-white p-2 transition-colors">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-    </button>
-    
-    <!-- Image Display -->
-    <div class="relative w-full max-w-5xl px-4 flex items-center justify-center flex-1 h-0">
-        <!-- Prev Button -->
-        <button id="modalPrevBtn" onclick="navigateModal(-1)" class="absolute left-4 md:left-8 text-white/50 hover:text-white p-3 md:p-4 rounded-full bg-black/50 hover:bg-black/80 transition-all hidden z-10">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-        
-        <img id="modalImage" src="" alt="Event Image Full" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95" onclick="event.stopPropagation()">
-        
-        <!-- Next Button -->
-        <button id="modalNextBtn" onclick="navigateModal(1)" class="absolute right-4 md:right-8 text-white/50 hover:text-white p-3 md:p-4 rounded-full bg-black/50 hover:bg-black/80 transition-all hidden z-10">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
-    </div>
-    
-    <!-- Counter -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/60 rounded-full text-white text-sm font-medium tracking-wide">
-        <span id="modalCounter">1 / 1</span>
-    </div>
-</div>
 
-<script>
-    let currentImages = [];
-    let currentIndex = 0;
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const counter = document.getElementById('modalCounter');
-    const prevBtn = document.getElementById('modalPrevBtn');
-    const nextBtn = document.getElementById('modalNextBtn');
 
-    function openImageModal(element) {
-        // Read the image URLs from the hidden script tag
-        const scriptTag = element.querySelector('script[type="application/json"]');
-        if (!scriptTag) return;
-        
-        currentImages = JSON.parse(scriptTag.textContent);
-        if (!currentImages || currentImages.length === 0) return;
-        
-        currentIndex = 0;
-        updateModalContent();
-        
-        // Show modal
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        
-        // Timeout to allow DOM update before triggering opacity transition
-        setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            modalImg.classList.remove('scale-95');
-            modalImg.classList.add('scale-100');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }, 10);
-    }
 
-    function closeImageModal() {
-        modal.classList.add('opacity-0');
-        modalImg.classList.remove('scale-100');
-        modalImg.classList.add('scale-95');
-        
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }, 300);
-    }
-
-    function updateModalContent() {
-        modalImg.src = currentImages[currentIndex];
-        counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
-        
-        // Show/hide navigation arrows based on total images
-        if (currentImages.length > 1) {
-            prevBtn.classList.remove('hidden');
-            nextBtn.classList.remove('hidden');
-        } else {
-            prevBtn.classList.add('hidden');
-            nextBtn.classList.add('hidden');
-        }
-    }
-
-    function navigateModal(direction) {
-        currentIndex += direction;
-        
-        // Loop around
-        if (currentIndex < 0) {
-            currentIndex = currentImages.length - 1;
-        } else if (currentIndex >= currentImages.length) {
-            currentIndex = 0;
-        }
-        
-        // Add a slight fade effect when changing images
-        modalImg.classList.add('opacity-50', 'scale-[0.98]');
-        setTimeout(() => {
-            updateModalContent();
-            modalImg.classList.remove('opacity-50', 'scale-[0.98]');
-        }, 150);
-    }
-
-    // Close modal when clicking outside the image
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal || e.target.closest('div.relative.w-full')) {
-            // Check if clicked exactly on the background overlay
-            if (e.target === modal || e.target.tagName === 'DIV' && e.target.classList.contains('items-center')) {
-                closeImageModal();
-            }
-        }
-    });
-
-    // Support keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (!modal.classList.contains('hidden')) {
-            if (e.key === 'Escape') closeImageModal();
-            if (e.key === 'ArrowLeft') navigateModal(-1);
-            if (e.key === 'ArrowRight') navigateModal(1);
-        }
-    });
-</script>
-
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('error') === 'already') {
-        const toast = document.createElement('div');
-        toast.className = 'fixed bottom-6 right-6 bg-red-500 text-white px-5 py-3 rounded-xl shadow-lg text-sm font-medium z-50 animate-bounce';
-        toast.textContent = 'คุณได้ลงทะเบียนกิจกรรมนี้ไปแล้ว';
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
-        window.history.replaceState({}, document.title, "/index");
-    }
-</script>
