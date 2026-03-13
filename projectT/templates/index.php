@@ -20,7 +20,8 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
- 
+  
+
     <!-- Section Header -->
     <div class="flex items-center justify-between mb-6">
         <div>
@@ -58,10 +59,6 @@
                         ?>
                         <div class="h-48 overflow-hidden bg-gray-100 grid <?= $gridClass ?> gap-0.5 relative group cursor-pointer" onclick="openImageModal(this)">
                             
-                            <script type="application/json">
-                                <?= json_encode(array_map(function($img) { return '/' . $img['image_path']; }, $event['images'])) ?>
-                            </script>
-                            
                             <?php foreach(array_slice($event['images'], 0, 3) as $index => $img): ?>
                                 <div class="relative h-full w-full">
                                     <img src="/<?= htmlspecialchars($img['image_path']) ?>"
@@ -94,9 +91,9 @@
                         <div class="space-y-2 text-sm text-gray-500 flex-1">
                             <div class="flex items-center gap-2">
                                <p><strong>ช่วงเวลา:</strong> 
-                                  <?= date('d/m/Y', strtotime($event['start_date'])) ?> - 
+                                  <?= date('d/m/Y', strtotime($event['start_date'])) ?> 
                                   <?= date('d/m/Y', strtotime($event['end_date'])) ?>
-                               </p>s
+                               </p>
                             </div>
                             <div class="flex items-center gap-2">
                                 <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,6 +122,23 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+      <?php if (isset($_GET['error']) && $_GET['error'] === 'already'): ?>
+        <div id="toast-already" class="flex items-center gap-3 mb-6 px-5 py-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl shadow-sm animate-fade-in">
+            <svg class="w-5 h-5 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+            <div class="flex-1">
+                <p class="font-semibold text-sm">คุณลงทะเบียนกิจกรรมนี้ไปแล้ว</p>
+                <p class="text-xs text-amber-600 mt-0.5">ไปดูสถานะการสมัครได้ที่หน้า <a href="/my_events" class="underline font-medium hover:text-amber-800">กิจกรรมของฉัน</a></p>
+            </div>
+            <button onclick="document.getElementById('toast-already').remove()" class="text-amber-400 hover:text-amber-600 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
         </div>
     <?php endif; ?>
 
