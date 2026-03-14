@@ -20,8 +20,9 @@
     <style>
         body { font-family: 'Kanit', sans-serif; }
         .nav-link { transition: color 0.2s, background 0.2s; }
-        .dropdown:hover .dropdown-menu { display: block; }
         .dropdown-menu { display: none; }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu { display: block; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
@@ -74,7 +75,7 @@ $isLoggedIn  = isset($_SESSION['user_id']);
 
                     <!-- User Dropdown -->
                     <div class="relative dropdown ml-2">
-                        <button class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-medium">
+                        <button class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors text-sm font-medium" aria-haspopup="true">
                             <div class="w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center">
                                 <span class="text-white text-xs font-bold"><?= strtoupper(substr($_SESSION['user_id'] ?? 'U', 0, 1)) ?></span>
                             </div>
@@ -175,6 +176,7 @@ $isLoggedIn  = isset($_SESSION['user_id']);
 </div>
 <?php endif; ?>
 <script>
+    // Mobile hamburger only
     document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
         const menu = document.getElementById('mobile-menu');
         menu.classList.toggle('hidden');

@@ -106,13 +106,13 @@
                 <table class="min-w-full divide-y divide-gray-100">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">User ID</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">อีเมล</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">จังหวัด</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">วันที่ลงทะเบียน</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">สถานะ</th>
-                            <th class="px-5 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">การจัดการ</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden sm:table-cell">User ID</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">อีเมล</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">จังหวัด</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">วันที่ลงทะเบียน</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">สถานะ</th>
+                            <th class="px-4 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">จัดการ</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
@@ -123,11 +123,11 @@
                         <?php else: ?>
                             <?php foreach ($data['participants'] as $p): ?>
                                 <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="px-5 py-4 text-xs text-gray-400 font-mono"><?= htmlspecialchars($p['user_id']) ?></td>
-                                    <td class="px-5 py-4 font-medium text-gray-900 text-sm"><?= htmlspecialchars($p['firstname'] . ' ' . $p['lastname']) ?></td>
-                                    <td class="px-5 py-4 text-sm text-gray-500"><?= htmlspecialchars($p['email']) ?></td>
-                                    <td class="px-5 py-4 text-sm text-gray-500"><?= htmlspecialchars($p['province']) ?></td>
-                                    <td class="px-5 py-4 text-sm text-gray-500"><?= htmlspecialchars($p['registered_at']) ?></td>
+                                    <td class="px-4 py-4 text-xs text-gray-400 font-mono hidden sm:table-cell"><?= htmlspecialchars($p['user_id']) ?></td>
+                                    <td class="px-4 py-4 font-medium text-gray-900 text-sm"><?= htmlspecialchars($p['firstname'] . ' ' . $p['lastname']) ?></td>
+                                    <td class="px-4 py-4 text-sm text-gray-500 hidden md:table-cell"><?= htmlspecialchars($p['email']) ?></td>
+                                    <td class="px-4 py-4 text-sm text-gray-500 hidden lg:table-cell"><?= htmlspecialchars($p['province']) ?></td>
+                                    <td class="px-4 py-4 text-sm text-gray-500 hidden lg:table-cell"><?= htmlspecialchars($p['registered_at']) ?></td>
                                     <td class="px-5 py-4">
                                         <?php if ($p['status'] === 'pending'): ?>
                                             <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-full">
