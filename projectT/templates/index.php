@@ -126,23 +126,28 @@
     <?php endif; ?>
 
       <?php if (isset($_GET['error']) && $_GET['error'] === 'already'): ?>
-        <div class="animate-toast fixed top-5 right-5 z-[9999] flex items-center gap-3 px-5 py-4
-                    bg-white border border-amber-200 text-amber-800 rounded-2xl
-                    shadow-xl max-w-sm w-full sm:w-auto pointer-events-none">
-            <svg class="w-5 h-5 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-            </svg>
-            <div>
-                <p class="font-semibold text-sm">คุณลงทะเบียนกิจกรรมนี้ไปแล้ว</p>
-                <p class="text-xs text-amber-600 mt-0.5">ดูสถานะได้ที่ <a href="/my_events" class="underline font-medium pointer-events-auto">กิจกรรมของฉัน</a></p>
-            </div>
+    <div id="toast-error" class="animate-toast fixed top-5 right-5 z-[9999] flex items-start gap-3 px-5 py-4
+                bg-white border border-amber-200 text-amber-800 rounded-2xl
+                shadow-xl max-w-sm w-full sm:w-auto">    
+        <svg class="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+
+        <div class="flex-1">
+            <p class="font-semibold text-sm">คุณลงทะเบียนกิจกรรมนี้ไปแล้ว</p>
+            <p class="text-xs text-amber-600 mt-0.5">
+                ดูสถานะได้ที่ <a href="/my_events" class="underline font-medium hover:text-amber-800 transition-colors">กิจกรรมของฉัน</a>
+            </p>
         </div>
-    <?php endif; ?>
-    <button onclick="document.getElementById('toast-success').remove()" class="pointer-events-auto text-green-400 hover:text-green-600 transition-colors">
+
+        <button onclick="document.getElementById('toast-error').remove()" 
+                class="ml-2 text-amber-400 hover:text-amber-600 transition-colors shrink-0">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
+    </div>
+<?php endif; ?>
 
 
 </div>
