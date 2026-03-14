@@ -27,7 +27,7 @@
             <form action="/register" method="POST" class="space-y-4">
 
                 <!-- Name Row -->
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">ชื่อ</label>
                         <input type="text" name="firstname" required placeholder="ชื่อจริง"
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- Gender & Birthday -->
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1.5">เพศ</label>
                         <select name="gender" required

@@ -24,7 +24,7 @@ function generateUserOTP($userId, $eventId) {
     // สุ่มเลข 6 หลัก
     $otp = sprintf("%06d", mt_rand(100000, 999999)); 
 
-    // ใช้ PHP คำนวณเวลาหมดอายุ เวลากรุงเทพ
+    // ใช้  คำนวณเวลาหมดอายุ เวลากรุงเทพ
     $expireTime = date('Y-m-d H:i:s', strtotime('+30 minutes'));
 
     $sql = "UPDATE Registrations 
